@@ -1,8 +1,13 @@
 plugins_enabled:
   - git
+  - shell
 
 plugin_config:
   git:
     excluded_files:
       - app.py
       - drwatcher
+  shell:
+    excluded_files:
+    - modules
+    - core/scripts

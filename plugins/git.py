@@ -1,21 +1,36 @@
+from functools import partial
+from subprocess import check_output
+from fnmatch import fnmatch
 import logging
 
-def run_plugin(project_path, CONFIG):
-    from subprocess import check_output
-    from fnmatch import fnmatch
+def run_plugin(project_path, config, verbose):
+    """
+    Run git status command in project and parse not committed files.
+    If the files not are excluded, report them.
 
-    project_path = kwargs["project_path"]
-    excluded_files = CONFIG["excluded_files"]
+    :param project_path: absolut path of the git project
+    :type project_path: str
+    :param config: plugin config defined in config.yml
+    :type config: dict
+    """
+    excluded_files = config["excluded_files"]
+    msg = "GIT - found not expected file: {}"
+    try:
+        status = check_output(["git", "-C", project_path,
+                               "status", "--porcelain"]).decode().splitlines()
+    except Exception as e:
+        raise(PluginError(e))
 
-    status = check_output(["git", "-C", project_path,
-                           "status", "-s"]).decode().splitlines()]
-
-    files = [file.split(" ")[1] for file in status]
-    files = [file for file in files if not ]
-
-    msg = "found not expected file: {}"
+    files = (line[3:] for line in status)
 
     for file in files:
-        if file not in excluded_files and not fnmatch:
-            print(msg.format(file))
+        check_exclude = partial(fnmatch, file)
+        if not any(map(check_exclude, excluded_files)):
             logging.info(msg.format(file))
+            print(msg.format(file))
+
+
+class PluginError(Exception):
+    """Standard exception to report errors to the plugin caller."""
+
+    pass
