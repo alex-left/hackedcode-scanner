@@ -1,0 +1,8 @@
+plugins_enabled:
+  - git
+
+plugin_config:
+  git:
+    excluded_files:
+      - app.py
+      - drwatcher
