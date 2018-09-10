@@ -10,12 +10,10 @@ from lib.helpers import filter_files
 from concurrent.futures import ProcessPoolExecutor
 
 
-def run_plugin(config, verbose=False):
+def run_plugin(config, *args, **kwargs):
     """
     :param config: plugin config defined in yaml
     :type config: dict
-    :param verbose: report if verbose mode is enabled, false by default
-    :type verbose: bolean
     """
 
     excluded_files = config["excluded_files"]
@@ -42,4 +40,4 @@ def check_file(pattern, path):
             msg_content = \
                 "SHELL - found suspect string in file: {}\nLINE: {}".format(
                     path.resolve(), result.group())
-            logging.info(msg_content)
+            logging.warning(msg_content)

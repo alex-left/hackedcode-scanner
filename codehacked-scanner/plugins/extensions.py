@@ -2,8 +2,6 @@
 Examine all files in project_path defined in config file
 and report all files which have the defined extensions.
 """
-
-
 from pathlib import Path
 from fnmatch import fnmatch
 import logging
@@ -11,12 +9,10 @@ from functools import partial
 import os
 
 
-def run_plugin(config, verbose=False):
+def run_plugin(config, *args, **kwargs):
     """
     :param config: plugin config defined in config.yml
     :type config: dict
-    :param verbose: report if verbose mode is enabled, false by default
-    :type verbose: bolean
     """
 
     def check_path(work_path):
@@ -33,7 +29,7 @@ def run_plugin(config, verbose=False):
                     msg = \
                         "EXTENSIONS - found file: {}".format(
                             item.resolve())
-                    logging.info(msg)
+                    logging.warning(msg)
 
     target_paths = config["target_paths"]
     target_extensions = config["target_extensions"]

@@ -9,7 +9,7 @@ from fnmatch import fnmatch
 import logging
 
 
-def run_plugin(config, verbose):
+def run_plugin(config, *args, **kwargs):
     """
     :param config: plugin config defined in yaml
     :type config: dict
@@ -27,4 +27,4 @@ def run_plugin(config, verbose):
     for file in files:
         check_exclude = partial(fnmatch, file)
         if not any(map(check_exclude, excluded_files)):
-            logging.info(msg.format(file))
+            logging.warning(msg.format(file))
