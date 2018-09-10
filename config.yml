@@ -1,13 +1,37 @@
+# The default config file is based on a criteria for a Drupal project
+log_enabled: no
+log_path: "codehacker-scanner.log"
 plugins_enabled:
   - git
   - shell
+  - perms
 
 plugin_config:
   git:
-    excluded_files:
-      - app.py
-      - drwatcher
+    excluded_files: []
   shell:
     excluded_files:
-    - modules
-    - core/scripts
+    - modules/
+    - core/scripts/
+    - ".git/"
+    patterns:
+    - '(/usr|/usr/local)?/bin/(ba|da|z|t|tc)?sh ?'
+    - ' [A-Za-z0-9 _\-.]+\.sh '
+  perms:
+    excluded_files:
+    - ".git/"
+    - "vendor/"
+    - core/scripts/
+    patterns:
+    - '(/usr)?(/local)?/bin/(ba|da)?sh'
+    - '/[A-Za-z0-9 _\-.].sh '
+  extensions:
+    target_paths:
+    - "sync/"
+    - "sites/*/files/*"
+    target_extensions:
+    - '.sh'
+    - '.php'
+    - '.py'
+    excluded_paths:
+    - sync/php/twig/*

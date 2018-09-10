@@ -1,3 +1,5 @@
 .rope*
 *.pyc
 *.log
+__pycache__/
+tests
