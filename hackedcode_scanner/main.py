@@ -6,7 +6,7 @@ from pathlib import Path
 from pkg_resources import resource_filename
 
 MODULE_NAME = "hackedcode_scanner"
-__version__ = 0.1
+__version__ = 'v0.1'
 
 def load_configfile(path):
     """
