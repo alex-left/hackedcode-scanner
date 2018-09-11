@@ -6,6 +6,7 @@ If the files not are excluded, report them.
 from functools import partial
 from subprocess import check_output
 from fnmatch import fnmatch
+from shutil import which
 import logging
 
 
@@ -14,6 +15,8 @@ def run_plugin(config, *args, **kwargs):
     :param config: plugin config defined in yaml
     :type config: dict
     """
+    if not which('git'):
+        raise Exception('Git program not found in PATH, can not continue')
     excluded_files = config["excluded_files"]
     msg = "GIT - found not expected file: {}"
     try:
