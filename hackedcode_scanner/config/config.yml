@@ -2,7 +2,7 @@
 
 # enable a log file
 log_enabled: no
-log_path: "codehacker-scanner.log"
+log_path: "hackedcode-scanner.log"
 
 # the names of the enabled plugins
 plugins_enabled:
