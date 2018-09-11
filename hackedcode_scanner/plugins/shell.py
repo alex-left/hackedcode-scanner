@@ -6,7 +6,7 @@ indicates possible and forbbiden shell code.
 
 import logging
 import re
-from lib.helpers import filter_files
+from ..lib.helpers import filter_files
 from concurrent.futures import ProcessPoolExecutor
 
 
@@ -21,6 +21,7 @@ def run_plugin(config, *args, **kwargs):
     paths = filter_files(excluded_files)
     executor = ProcessPoolExecutor()
     for item in paths:
+        logging.debug("analizing {}".format(item))
         if item.is_file():
             executor.submit(check_file, pattern, item)
 

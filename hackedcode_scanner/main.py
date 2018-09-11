@@ -3,9 +3,12 @@ import logging
 import os
 import argparse
 from pathlib import Path
+from pkg_resources import resource_filename
 
+MODULE_NAME = "hackedcode_scanner"
+__version__ = 0.1
 
-def load_configfile(path='config.yml'):
+def load_configfile(path):
     """
     Read and load YAML config file.
 
@@ -51,30 +54,42 @@ def parse_args():
 
 
 def main():
-    """Main function."""
+    """Main function. Manage CLI client"""
 
     args = parse_args()
     level = args.level
     logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                         level=getattr(logging, level.upper()),
                         handlers=[logging.StreamHandler()])
+
+    # get default config installed with package
+    default_config = resource_filename(MODULE_NAME, 'config/config.yml')
+
     if args.config:
         CONFIG = load_configfile(args.config)
     else:
-        CONFIG = load_configfile()
+        CONFIG = load_configfile(default_config)
+
     if CONFIG["log_enabled"]:
         logging.getLogger().addHandler(logging.FileHandler(CONFIG["log_path"]))
     logging.debug("Yaml config loaded")
+
+    # adquire the valid full path of project path
     project_path = str(Path(args.path[0]).resolve())
+
+    # load plugins
     plugins_loaded = []
     for plugin in CONFIG['plugins_enabled']:
         try:
-            plugins_loaded.append(import_module('plugins.{}'.format(plugin)))
+            plugins_loaded.append(import_module(
+                '{}.plugins.{}'.format(MODULE_NAME, plugin)))
             plugins_loaded[-1].name = plugin
             logging.debug("plugin {} loaded".format(plugin))
         except ImportError as e:
             logging.warning("can't load {} plugin: {}".format(plugin, e.msg))
     logging.debug("Plugins loaded")
+
+    # Run scanner
     logging.info("Begin scan")
     for plugin in plugins_loaded:
         try:

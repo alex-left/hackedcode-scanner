@@ -4,7 +4,7 @@ config file and check if have execution permission.
 """
 
 import logging
-from lib.helpers import filter_files
+from ..lib.helpers import filter_files
 
 
 def run_plugin(config, *args, **kwargs):
@@ -15,7 +15,7 @@ def run_plugin(config, *args, **kwargs):
     excluded_files = config["excluded_files"]
     paths = filter_files(excluded_files)
     for item in paths:
-            logging.debug("analizing {}".format(item))
+        logging.debug("analizing {}".format(item))
         if item.is_file():
             check_file(item)
 
