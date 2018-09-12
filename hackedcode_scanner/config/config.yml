@@ -17,6 +17,8 @@ plugin_config:
     excluded_files:
     - modules/
     - core/scripts/
+    - core/tests
+    - vendor
     - ".git/"
     patterns:
     - '(/usr|/usr/local)?/bin/(ba|da|z|t|tc)?sh ?'
