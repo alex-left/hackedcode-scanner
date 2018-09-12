@@ -36,22 +36,24 @@ $ hackedcode-scanner.py -c myproject-config.yml /path-of-myproject
 
 ## HOW INSTALL
 
+The easiest way is install directly from git:
+```
+pip3 install git+https://github.com/mrmilu/hackedcode-scanner
+```
+
+Also you can download the code.
+
 1. clone the project:
 ```
-git clone
+git clone https://github.com/mrmilu/hackedcode-scanner && cd hackedcode-scanner
 ```
 
-2. Move to the code folder
-```
-cd hackedcode-scanner
-```
-
-3. You can use the app directly from source code (needs pyyaml library)
+2. You can use the app directly from source code (needs pyyaml library)
 ```
 python3 hackedcode_scanner/main.py -c myproject-config.yml /path-of-myproject
 ```
 
-4. Or you can install it with pip
+3. Or you can install it with pip
 ```
 sudo pip3 install .
 ```
