@@ -19,7 +19,7 @@ import os
 import argparse
 from pathlib import Path
 from pkg_resources import resource_filename
-from lib.helpers import load_yaml
+from .lib.helpers import load_yaml
 
 MODULE_NAME = "hackedcode_scanner"
 
