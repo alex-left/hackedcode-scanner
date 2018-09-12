@@ -22,7 +22,7 @@ plugin_config:
     - ".git/"
     patterns:
     - '(/usr|/usr/local)?/bin/(ba|da|z|t|tc)?sh ?'
-    - ' [A-Za-z0-9 _\-.]+\.sh '
+    # - ' [A-Za-z0-9 _\-.]+\.sh '
   perms:
     excluded_files:
     - ".git/"
