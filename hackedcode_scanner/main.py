@@ -4,32 +4,10 @@ import os
 import argparse
 from pathlib import Path
 from pkg_resources import resource_filename
+from lib.helpers import load_yaml
 
 MODULE_NAME = "hackedcode_scanner"
 __version__ = 'v0.1'
-
-def load_configfile(path):
-    """
-    Read and load YAML config file.
-
-    :param path: filepath of yaml configfile
-    :type path: str
-    :return: yaml content
-    :rtype: dict
-    """
-    try:
-        import yaml
-    except ImportError as e:
-        logging.error("""A error ocurred when trying to use the pyyaml library.
-              This library must be installed to use this program.
-              You can try with 'pip install pyyaml' command {}""".format(e))
-        raise SystemExit
-    try:
-        with open(path, 'r') as file:
-            config = yaml.load(file)
-        return config
-    except Exception as e:
-        raise(e)
 
 
 def parse_args():
@@ -66,9 +44,9 @@ def main():
     default_config = resource_filename(MODULE_NAME, 'config/config.yml')
 
     if args.config:
-        CONFIG = load_configfile(args.config)
+        CONFIG = load_yaml(args.config)
     else:
-        CONFIG = load_configfile(default_config)
+        CONFIG = load_yaml(default_config)
 
     if CONFIG["log_enabled"]:
         logging.getLogger().addHandler(logging.FileHandler(CONFIG["log_path"]))

@@ -1,8 +1,32 @@
-"""Useful functions for plugins."""
+"""Common functions."""
 
 from pathlib import Path
 from glob import glob
 import os
+
+
+def load_yaml(path):
+    """
+    Read and load YAML config file.
+
+    :param path: filepath of yaml configfile
+    :type path: str
+    :return: yaml content
+    :rtype: dict
+    """
+    try:
+        import yaml
+    except ImportError as e:
+        logging.error("""A error ocurred when trying to use the pyyaml library.
+              This library must be installed to use this program.
+              You can try with 'pip install pyyaml' command {}""".format(e))
+        raise SystemExit
+    try:
+        with open(path, 'r') as file:
+            config = yaml.load(file)
+        return config
+    except Exception as e:
+        raise(e)
 
 
 def filter_files(excluded_files):
