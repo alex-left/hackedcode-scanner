@@ -22,7 +22,6 @@ from pkg_resources import resource_filename
 from lib.helpers import load_yaml
 
 MODULE_NAME = "hackedcode_scanner"
-__version__ = 'v0.1'
 
 
 def parse_args():
