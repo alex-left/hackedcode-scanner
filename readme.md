@@ -1,5 +1,5 @@
 # HACKEDCODE SCANNER
-python pluggable application to scan a project code to find posible hints of hacking
+python pluggable application to scan files of a project code to find posible hints of hacking
 
 ## REQUIREMENTS
 python >= 3.3
@@ -148,3 +148,4 @@ or into default python path, usually in /usr/local/lib/[python]/dist-packages/ (
 
 ## TODO
 - load plugins and config files from alternatives paths.
+- add automated tests
