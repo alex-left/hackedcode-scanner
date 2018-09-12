@@ -10,7 +10,7 @@ setup(
     author='Alex Left',
     author_email='aizquierdo@mrmilu.com',
     url='https://github.com/mrmilu/hackedcode-scanner',
-    version=hackedcode-scanner.main.__version__,
+    version=hackedcode_scanner.main.__version__,
     packages=find_packages(),
     install_requires=["pyyaml"],
     entry_points={
