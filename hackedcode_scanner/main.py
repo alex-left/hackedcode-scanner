@@ -58,7 +58,7 @@ def main():
     default_config = resource_filename(MODULE_NAME, 'config/config.yml')
 
     if args.config:
-        CONFIG = load_yaml(args.config)
+        CONFIG = load_yaml(args.config[0])
     else:
         CONFIG = load_yaml(default_config)
 
